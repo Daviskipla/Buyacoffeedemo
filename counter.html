@@ -12,11 +12,14 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            height: 100vh;
+            background-attachment: fixed;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
         }
         header {
             background: #28a745;
@@ -33,6 +36,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-wrap: wrap;
         }
         .profile-pic {
             width: 50px;
@@ -48,7 +52,7 @@
         }
         h1 {
             margin: 0;
-            font-size: 2.2em;
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
         }
         .account-area {
             margin-left: 15px;
@@ -60,7 +64,7 @@
             border: none;
             border-radius: 20px;
             cursor: pointer;
-            font-size: 1em;
+            font-size: clamp(0.8rem, 2.5vw, 1rem);
             font-family: Arial, sans-serif;
         }
         .get-in-touch-btn:hover {
@@ -72,7 +76,8 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 600px;
+            width: 90%;
+            max-width: 600px;
             margin-top: 100px;
             position: relative;
             top: 0;
@@ -94,15 +99,18 @@
         h2 {
             color: #f5f2f2;
             margin-bottom: 10px;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
         }
         p {
             color: #0a0a0a;
             margin-bottom: 20px;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
         }
         .options {
             display: flex;
             gap: 10px;
             margin-bottom: 20px;
+            flex-wrap: wrap;
         }
         .option {
             border: 1px solid #f1eded;
@@ -112,6 +120,8 @@
             cursor: pointer;
             background: #fff;
             transition: background-color 0.3s;
+            flex: 1;
+            min-width: 80px;
         }
         .option.selected {
             background: #f2f4f2;
@@ -125,6 +135,7 @@
             width: 100%;
             border: 1px solid #f5f3f3;
             border-radius: 5px;
+            box-sizing: border-box;
         }
         button {
             background-color: #28a745;
@@ -133,6 +144,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: clamp(0.8rem, 2.5vw, 1rem);
         }
         button:hover {
             background-color: #218838;
@@ -143,7 +155,7 @@
             font-style: italic;
             margin-bottom: 10px;
         }
-        /* Thank You Modal */
+        
         .thank-you-modal {
             display: none;
             position: fixed;
@@ -161,7 +173,9 @@
             padding: 20px;
             border-radius: 10px;
             text-align: center;
+            width: 90%;
             max-width: 400px;
+            margin: 20px;
             animation: fadeIn 1s;
         }
         @keyframes fadeIn {
@@ -175,6 +189,49 @@
         @keyframes glow {
             from { text-shadow: 0 0 5px #28a745; }
             to { text-shadow: 0 0 20px #28a745, 0 0 30px #28a745; }
+        }
+
+    
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                margin-top: 120px;
+            }
+            
+            .image-section {
+                margin-top: 20px;
+            }
+            
+            .profile-pic {
+                width: 40px;
+                height: 40px;
+            }
+            
+            header {
+                padding: 15px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                flex-direction: column;
+                padding: 10px 0;
+            }
+            
+            .profile-pic {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            
+            .account-area {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+            
+            .option {
+                flex: 1 0 40%;
+                margin-bottom: 10px;
+            }
         }
     </style>
 </head>
@@ -192,12 +249,12 @@
     </header>
     <div class="container">
         <div class="form-section">
-            <h2 class="disclaimer"><strong>Disclaimer:</strong> No amount will be deducted from your account, it is just a demo page</h2>
+            <h2 class="disclaimer"><strong>Disclaimer:</strong>This is just a Demo! </h2>
             <h2>Gift a cup of tea</h2>
             <p>How about a cup of Tea😁😋?</p>
             <p><strong>Note:</strong> Upload an audio file as a gesture of support.</p>
-            <div class="custom-input">
-                <input type="file" accept="audio/*" id="audioUpload" onchange="prepareAudio()">
+            <div class="custom-input" style="background: #f2f4f2; padding: 16px; ">
+                <input type="file" accept="audio/*" id="audioUpload" onchange="prepareAudio()" style="background: #fff; border: 1.5px solid #28a745; border-radius: 5px; padding: 12px; width: 100%; box-sizing: border-box;">
             </div>
             <p>How many glasses would you like to donate?</p>
             <div class="options" id="optionButtons">
@@ -207,7 +264,7 @@
                 <button class="option" onclick="selectOption(this, 500)">4<br>Ksh.500</button>
             </div>
             <button onclick="initiateDonation()">Donate</button>
-            <p><a href="https://daviskipla.github.io/in-a-million/today.html" target="_blank" >my special</a></p>
+            <p><a href="https://daviskipla.github.io/in-a-million/today.html" target="_blank" ><u>another one</u></a></p>
         </div>
         <div class="image-section">
             <img src="jeremy-yap-jn-HaGWe4yw-unsplash.jpg" alt="Cup of tea">
@@ -218,7 +275,6 @@
             <h2>Thank You!</h2>
             <p>Transaction completed successfully, thanks for your generosity!</p>
             <p class="te-fiti-glow">😁😋🤝</p>
-            <p>This is a demo page simulation.</p>
             <button onclick="closeModal()">Close</button>
         </div>
     </div>
